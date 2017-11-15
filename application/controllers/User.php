@@ -13,6 +13,7 @@ class User extends CI_Controller {
 	{
 		$data = array();
 		$data['CUSTOME_PATH'] = $this->paths ;
+		$data['menuActive'] = 'dashboard';
 		if(!is_loggedin())
 		{
 			redirect('user/login');

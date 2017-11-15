@@ -12,7 +12,7 @@ class Translate extends CI_Controller {
 			redirect('user/login');
 		}
 		$this->load->model('files_model');
-		$this->load->library('Ajax_pagination');
+		$this->load->library(array('Ajax_pagination','javascript'));
     }
 
 
@@ -23,16 +23,26 @@ class Translate extends CI_Controller {
 
 	public function word()
 	{
-
 		$data = array();
 		$data['message'] = '';
+        $data['fileType'] = 'docx';
+        $data['CUSTOME_PATH'] = $this->paths ;
+        $data['menuActive'] = 'docx';
+        $data['assets'] = array(
+        'head' => array(
+           
+            ),
+        'footer' => array(
+            $this->javascript->external(base_url() . $this->paths['javascripts'] . "translate_list.js"),
+            )
+        );
 
 		$this->load->view('layout/header',$data );
 		$this->load->view('translate/index',$data );
 		$this->load->view('layout/footer',$data );
 	}
 
-	public function wordAjax()
+	public function wordAjax($page)
 	{
 
 		$data = array();
@@ -45,7 +55,7 @@ class Translate extends CI_Controller {
         } else {
             $offset = $page;
         }
-        $str = ($str == 'all') ? $str = NULL : $str;
+        $str = ($post['searchText'] == 'all') ? $post['searchText'] = NULL : $post['searchText'];
         $totalRow = $this->files_model->get_all_word(0, 0, TRUE, $post);
 
         $details['files'] = $this->files_model->get_all_word($post['perPage'], $offset, FALSE, $post);
@@ -72,10 +82,5 @@ class Translate extends CI_Controller {
 
         $data['data'] = $this->load->view('translate/word_list', $details, TRUE);
 		echo json_encode($data);
-
-
-		$this->load->view('layout/header',$data );
-		$this->load->view('user/index',$data );
-		$this->load->view('layout/footer',$data );
 	}
 }

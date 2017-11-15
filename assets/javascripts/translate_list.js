@@ -1,0 +1,110 @@
+//translate_list
+var FilesHelper = {
+
+    fileType: $('#fileType').val(),
+    fileStatus: '',
+    searchText: '',
+    perPage : 10,
+    page : 0,
+
+    postData:'',
+
+    init : function(){
+       this.setValue('fileStatus','');
+       this.setValue('searchText','');
+       this.getDataAjax();
+    }, // end function  init
+    
+
+    getDataAjax : function(){
+            var obj = this;
+            $.ajax({
+            url: SITE_URL+'translate/wordAjax/'+this.page,
+            type: 'POST',
+            data: {fileType:this.fileType,fileStatus:this.fileStatus,searchText:this.searchText,page:this.page,perPage:this.perPage},
+            dataType: 'json',
+            success: function(data) {
+                obj.postData = data;
+                obj.setDataTable();
+                obj.setPagination();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    },
+
+    setValue : function(name,value){
+        this[name] = value;
+    },//end function  setValue
+
+    setDataTable: function(){
+        $('#tbl-word>tbody').empty();
+        $('#tbl-word>tbody').html(this.postData.data);
+         tooltops();
+    },
+
+    setPagination: function(){
+        $('.pagination').empty();
+        $('.pagination').html(this.postData.pagination);
+    },
+}
+
+$(document).on('change', '.project-filter', function(){
+    var id = this.id;
+    var value = $(this).val();
+    FilesHelper.setValue(id,value);
+    FilesHelper.setValue('page',0);
+    FilesHelper.getDataAjax();
+});
+
+$(document).on('click','#reset-filter',function(){
+    $('#projectType').val('');
+    $('#account').val('');
+    $('#projectStatus').val('');
+    $('#sel_type_of_documentation').val('');
+    $('#searchText').val('');
+    FilesHelper.setValue('page',0);
+    FilesHelper.setValue('page',0);
+
+    FilesHelper.init();
+    $('#pagination_offset').val(FilesHelper.perPage);
+});
+
+$(document).on('change', '#pagination_offset',function(){
+    var value = $(this).val();
+    FilesHelper.setValue('page',0);
+    FilesHelper.setValue('perPage',value);
+    FilesHelper.getDataAjax();
+});
+
+
+$(document).on('keyup', '#searchText',function(){
+    var value = $(this).val();
+    if(value.length >= 3)
+    {
+        FilesHelper.setValue('projectType','');
+        FilesHelper.setValue('account','');
+        FilesHelper.setValue('projectStatus','');
+        FilesHelper.setValue('sel_type_of_documentation','');
+
+        FilesHelper.setValue('page',0);
+        FilesHelper.setValue('searchText',value);
+        FilesHelper.getDataAjax();
+
+    }
+    else if(value.length == 0)
+    {
+        $('#reset-filter').trigger('click');
+    }
+});
+
+$(function(){
+    FilesHelper.init();
+});
+
+function getData(page)
+{
+     FilesHelper.setValue('page',page);
+     FilesHelper.getDataAjax();
+}

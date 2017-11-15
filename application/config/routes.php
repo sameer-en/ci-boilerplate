@@ -54,6 +54,6 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['translate/word/ajax'] = 'translate/wordAjax';
+$route['translate/word/ajax/(:num)'] = 'translate/wordAjax/$1';
 $route['translate/excel/ajax'] = 'translate/excelAjax';
 

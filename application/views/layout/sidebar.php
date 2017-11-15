@@ -32,18 +32,18 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+        <li <?php if($menuActive == 'dashboard'){echo 'class="active"';}?> ><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a>
         </li> -->
-        <li class="treeview">
+        <li class="treeview  <?php if($menuActive == 'docx' || $menuActive == 'xls'){echo 'active';}?>">
           <a href="#"><i class="fa fa-link"></i> <span>Translate</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo site_url('translate/word');?>">Word(.docx) Files</a></li>
-            <li><a href="<?php echo site_url('translate/excel');?>">Excel(.xls) Files</a></li>
+            <li <?php if($menuActive == 'docx'){echo 'class="active"';}?>><a href="<?php echo site_url('translate/word');?>">Word(.docx) Files</a></li>
+            <li <?php if($menuActive == 'xls'){echo 'class="active"';}?>><a href="<?php echo site_url('translate/excel');?>">Excel(.xls) Files</a></li>
           </ul>
         </li>
         <li class="treeview">

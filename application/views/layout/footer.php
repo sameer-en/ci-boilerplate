@@ -98,11 +98,24 @@
 <!-- jQuery 3 -->
 <script src="<?php echo site_url($CUSTOME_PATH['assets_bower'] .'jquery/dist/jquery.min.js');?>"></script><!-- Bootstrap 3.3.7 -->
 <script src="<?php echo site_url($CUSTOME_PATH['assets_bower'] .'bootstrap/dist/js/bootstrap.min.js');?>"></script>
+
+<?php
+if (!empty($assets['footer'])) {
+    foreach ($assets['footer'] as $asset) {
+        echo $asset;
+    }
+}
+?>
+
 <!-- AdminLTE App -->
 <script src="<?php echo site_url($CUSTOME_PATH['assets_dist'] .'js/adminlte.min.js');?>"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+  $(function(){ $('[data-toggle="tooltip"]').tooltip()});
+</script>
+
 </body>
 </html>

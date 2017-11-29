@@ -55,10 +55,12 @@ class Translate extends CI_Controller {
         } else {
             $offset = $page;
         }
-        $str = ($post['searchText'] == 'all') ? $post['searchText'] = NULL : $post['searchText'];
+        $post['searchText'] = ($post['searchText'] == 'all') ? $post['searchText'] = NULL : $post['searchText'];
         $totalRow = $this->files_model->get_all_word(0, 0, TRUE, $post);
 
         $details['files'] = $this->files_model->get_all_word($post['perPage'], $offset, FALSE, $post);
+       // print_r($details['files']);die;
+        $details['counter'] = ($offset*$post['perPage'])+1;
 
         $config['base_url'] = base_url('translate/word/ajax');
         $config['uri_segment'] = 4;
@@ -76,11 +78,14 @@ class Translate extends CI_Controller {
 
         $this->ajax_pagination->initialize($config);
 
-         $data['pagination'] = $this->ajax_pagination->create_links() . "<br/> Total Records : $totalRow";
+        $data['pagination'] = $this->ajax_pagination->create_links() . "<br/> Total Records : $totalRow";
         $data['limit'] = $limit;
         $this->ProjectController = $this;
 
         $data['data'] = $this->load->view('translate/word_list', $details, TRUE);
-		echo json_encode($data);
+		
+   //     print_r($details);
+//die('here');
+echo json_encode($data);
 	}
 }

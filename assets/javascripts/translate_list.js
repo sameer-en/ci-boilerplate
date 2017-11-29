@@ -29,7 +29,7 @@ var FilesHelper = {
                 obj.setPagination();
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log(errorThrown);
+               // console.log(errorThrown);
             }
         });
     },
@@ -41,12 +41,12 @@ var FilesHelper = {
     setDataTable: function(){
         $('#tbl-word>tbody').empty();
         $('#tbl-word>tbody').html(this.postData.data);
-         tooltops();
+        // tooltops();
     },
 
     setPagination: function(){
-        $('.pagination').empty();
-        $('.pagination').html(this.postData.pagination);
+        $('.paginationdiv').empty();
+        $('.paginationdiv').html(this.postData.pagination);
     },
 }
 
@@ -59,14 +59,6 @@ $(document).on('change', '.project-filter', function(){
 });
 
 $(document).on('click','#reset-filter',function(){
-    $('#projectType').val('');
-    $('#account').val('');
-    $('#projectStatus').val('');
-    $('#sel_type_of_documentation').val('');
-    $('#searchText').val('');
-    FilesHelper.setValue('page',0);
-    FilesHelper.setValue('page',0);
-
     FilesHelper.init();
     $('#pagination_offset').val(FilesHelper.perPage);
 });
@@ -91,11 +83,10 @@ $(document).on('keyup', '#searchText',function(){
         FilesHelper.setValue('page',0);
         FilesHelper.setValue('searchText',value);
         FilesHelper.getDataAjax();
-
     }
     else if(value.length == 0)
     {
-        $('#reset-filter').trigger('click');
+        FilesHelper.init();
     }
 });
 
@@ -108,3 +99,29 @@ function getData(page)
      FilesHelper.setValue('page',page);
      FilesHelper.getDataAjax();
 }
+
+$(document).on('click','.edit-word',function(){
+   var id = $(this).attr('data-id');
+   alert(id);
+});
+
+
+
+$(document).on('click','.delete-word',function(){
+   var id = $(this).attr('data-id');
+   alert(id);
+});
+
+
+
+$(document).on('click','.process-word',function(){
+   var id = $(this).attr('data-id');
+   alert(id);
+});
+
+
+
+$(document).on('click','.download-word',function(){
+   var id = $(this).attr('data-id');
+   alert(id);
+});

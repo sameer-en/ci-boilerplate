@@ -5,11 +5,11 @@
     echo "<tr>
                   <td>$counter</td>
                   <td>".$file['file_name']."</td>
-                  <td>".ucfirst($file['file_status'])."</td>
+                  <td><span class='label label-success'>".ucfirst($file['file_status'])."</span></td>
                   <td>".date("d-M-Y",strtotime($file['added_on']))."</td>
                   <td>".ucfirst($file['username'])."</td>
                   <!--<td><span class='label label-success'>Approved</span></td>-->
-                  <td><a href='javascript:void(0)' data-id='".$file['file_id']."' class='edit-word'>Edit</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='delete-word'>Delete</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='process-word'>Process</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='download-word'>Download</a></td>
+                  <td><a href='".site_url('translate/word/edit/').$file['file_id']."'  class='edit-word'>Edit</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='delete-word'>Delete</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='process-word'>Process</a> | <a href='javascript:void(0)' data-id='".$file['file_id']."' class='download-word'>Download</a></td>
                 </tr>";
       $counter++;
   }

@@ -48,6 +48,26 @@ var FilesHelper = {
         $('.paginationdiv').empty();
         $('.paginationdiv').html(this.postData.pagination);
     },
+    getDataForEdit : function(id){
+            var obj = this;
+            $.ajax({
+            url: SITE_URL+'translate/getInfo/',
+            type: 'POST',
+            data: {id:id},
+            dataType: 'json',
+            success: function(data) {
+                   $('#filePopupTitle').text('Process Word');
+                   
+                   
+                   $('#fileId').val(id);
+                   $('#filePopup').modal('show') ;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               // console.log(errorThrown);
+            }
+        });
+    },
+
 }
 
 $(document).on('change', '.project-filter', function(){
@@ -102,7 +122,7 @@ function getData(page)
 
 $(document).on('click','.edit-word',function(){
    var id = $(this).attr('data-id');
-   alert(id);
+   FilesHelper.getDataForEdit(id);
 });
 
 

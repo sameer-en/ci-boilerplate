@@ -57,5 +57,22 @@ public function get_all_word($limit, $offset, $getCount = FALSE, $post)
       
         return $result;
     }
+
+    public function getDetails($id)
+    {
+        $this->db->select('*');
+        $this->db->from('master_files');
+        $this->db->where('file_id',$id);
+        $query = $this->db->get();
+        if($query->num_rows() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            $result = $query->result_array();
+            return $result[0];
+        }
+    }
 }
     

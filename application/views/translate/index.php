@@ -22,6 +22,7 @@
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
+                  
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="searchText">
 
                   <div class="input-group-btn">
@@ -65,3 +66,73 @@
       <!--  -------------------------->
 
     </section>
+
+     <!-- Modal -->
+<div class="modal fade" id="filePopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="filePopupTitle">Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Add/Edit word file from here</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="fileUpload">Upload File</label>
+                  <input type="file" class="form-control1" id="fileUpload" name="fileUpload">
+                </div>
+                <div class="form-group">
+                  <label for="dictionaries">Select dictionaries</label>
+                  <p class="help-block">Example block-level help text here.</p>
+                  <?php if(count($dictionaries) > 0)
+                  {
+                    echo '<table><tr><th>Dictionary</th><th></th><th>Priority</th></tr>';
+                      foreach($dictionaries as $dictionry)
+                      {
+                        echo '<tr>
+                              <td>
+                              <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"  name="chkDic['.$dictionry['dic_id'].']" id="chkDic_'.$dictionry['dic_id'].'"> '.$dictionry['dic_name'].'
+                                </label>
+                              </div>
+                              </td>
+                              <td>&nbsp;</td>
+                              <td><input type="textbox" name="chkDic['.$dictionry['dic_id'].']" id="txtDic_'.$dictionry['dic_id'].'" size="2" class="form-control"/></td>
+                              </tr>';
+                      }
+
+                      echo '</table>';
+                  }?>
+                </div>
+                <div class="form-group">
+                  <label for="Comments">Comments</label>
+                  <textarea class="form-control" id="Comments" name="Comments" placeholder="Enter comments"></textarea>
+                </div>
+              </div>
+              <input type="hidden" name="fileId" id="fileId" value="0">
+
+              </form> 
+              <!-- /.box-body -->
+         
+        </div>
+        </div>
+       </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@ class Translate extends CI_Controller {
 		{
 			redirect('user/login');
 		}
-		$this->load->model('files_model');
+		$this->load->model(array('files_model','dictionary_model'));
 		$this->load->library(array('Ajax_pagination','javascript'));
     }
 
@@ -28,6 +28,8 @@ class Translate extends CI_Controller {
         $data['fileType'] = 'docx';
         $data['CUSTOME_PATH'] = $this->paths ;
         $data['menuActive'] = 'docx';
+        $data['dictionaries'] = $this->dictionary_model->getAllDictionries();
+
         $data['assets'] = array(
         'head' => array(
            
@@ -86,6 +88,61 @@ class Translate extends CI_Controller {
 		
    //     print_r($details);
 //die('here');
-echo json_encode($data);
+        echo json_encode($data);
 	}
+
+    public function getInfo()
+    {
+        echo json_encode(array('error'=> false));
+
+
+
+    }
+
+
+    public function editWord($id=0)
+    {
+        if($id <= 0)
+        {
+            redirect('translate/word');
+        }
+
+        $data['details'] = $this->files_model->getDetails($id);
+        if($data['details'] === false)
+        {
+            redirect('translate/word');
+        }
+
+        if($this->input->post())
+        {
+
+        }
+        $data['details']['arrDicIds'] = explode(',',$data['details']['dic_applied']);
+        $data['fileId'] = 0;
+        $data['message'] = '';
+        $data['fileType'] = 'docx';
+        $data['CUSTOME_PATH'] = $this->paths ;
+        $data['menuActive'] = 'docx';
+        $data['dictionaries'] = $this->dictionary_model->getAllDictionries();
+
+        $data['assets'] = array(
+        'head' => array(
+           
+            ),
+        'footer' => array(
+            $this->javascript->external(base_url() . $this->paths['javascripts'] . "translate_list.js"),
+            )
+        );
+
+
+        $this->load->view('layout/header',$data );
+        $this->load->view('translate/form',$data );
+        $this->load->view('layout/footer',$data );
+
+
+
+    }
+
 }
+
+

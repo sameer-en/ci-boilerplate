@@ -56,4 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['translate/word/ajax/(:num)'] = 'translate/wordAjax/$1';
 $route['translate/excel/ajax'] = 'translate/excelAjax';
-
+$route['translate/word/edit/(:num)'] = 'translate/editWord/$1';

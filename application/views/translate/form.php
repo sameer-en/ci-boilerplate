@@ -23,23 +23,34 @@
               <h3 class="box-title">Horizontal Form</h3>
             </div>
             <!-- /.box-header -->
+            
             <!-- form start -->
-            <form class="form-horizontal" name="frmForm" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" name="frmForm" id="frmForm" method="post" enctype="multipart/form-data">
               <input type="hidden" name="file_id" id="file_id" value="<?php echo $fileId;?>">
+              <input type="hidden" name="doc_file" id="doc_file" value="<?php echo $details['file_name'];?>">
               <div class="box-body">
+                <?php if($this->session->flashdata('error_document_upload')){
+              echo '<div class="alert alert-danger">'.$this->session->flashdata('error_document_upload').'</div>';
+            }?>
                 <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">File</label>
+                  <label for="file" class="col-sm-2 control-label">File</label>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-2">
                     <input type="file" class="" id="file" name="file">
-                    <br/>File:<?php echo $details['file_name']?>
                   </div>
+                  <div class="col-sm-4">
+                   File: <?php echo $details['file_name']?>
+                  </div>
+                  <div class="col-sm-10">
+                  <label id="file-error" class="error" for="file"></label>
+                </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">File Status</label>
+                  <label for="fileStatus" class="col-sm-2 control-label">File Status</label>
 
                   <div class="col-sm-4">
                      <select class="form-control" name="fileStatus" id="fileStatus">
+                      <option value="">select</option>
                     <option value="pending" <?php if($details['file_status'] == 'pending') echo " selected='selected'";?>>Pending</option>
                     <option value="completed" <?php if($details['file_status'] == 'completed') echo " selected='selected'";?>>Completed</option>
                   </select>
@@ -55,17 +66,22 @@
                 
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Select Dictionries to be applied</label>
-                <?php foreach($dictionaries as $dictionary){ 
-                    $checked = '';
-                    if(in_array($dictionary['dic_id'],$details['arrDicIds']))
-                       $checked = ' checked';
-                  ?>
-                  <div class="checkbox">
-                    <label  class="col-sm-2 "> 
-               <input type="checkbox" name="arrDic[<?php echo $dictionary['dic_id']?>]" <?php echo $checked;?>><?php echo $dictionary['dic_name']?>
-                    </label>
-                  </div>
-               <?php  }?>
+                
+                  <div class="col-sm-10">
+                  <?php foreach($dictionaries as $dictionary){ 
+                      $checked = '';
+                      if(in_array($dictionary['dic_id'],$details['arrDicIds']))
+                         $checked = ' checked';
+                    ?>
+                    <div class="checkbox">
+                      <label  class="col-sm-2 "> 
+                 <input type="checkbox" name="arrDic[]" <?php echo $checked;?> value="<?php echo $dictionary['dic_id']?>" id="arrDic<?php echo $dictionary['dic_id']?>"><?php echo $dictionary['dic_name']?></label>
+                    </div>
+                 <?php  }?>
+             </div>
+               <div class="col-sm-6 col-sm-offset-2">
+               <label id="arrDic[]-error" class="error" for="arrDic[]"></label>
+             </div>
              </div>
               </div>
               <!-- /.box-body -->
@@ -85,3 +101,6 @@
       <!--  -------------------------->
 
     </section>
+    <script type="text/javascript">
+      var ext = '<?php echo $fileType;?>';
+    </script>

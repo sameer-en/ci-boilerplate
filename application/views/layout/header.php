@@ -32,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+<link rel="stylesheet" href="<?php echo site_url($CUSTOME_PATH['assets_dist'] .'css/custom.css');?>">
 <?php
   if (!empty($assets['head'])) {
     foreach ($assets['head'] as $asset) {

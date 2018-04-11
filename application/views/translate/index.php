@@ -19,12 +19,12 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Word Files</h3>
-
+              <input type="hidden" name="fileType" id="fileType" value="<?php echo $fileType;?>">
               <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="searchText">
+                <a  href="<?php echo site_url('translate/word/add')?>" class="btn pull-left">Add</a>
 
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="searchText">
                   <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
@@ -34,6 +34,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+              <?php 
+              if($this->session->flashdata('success_document_upload')){
+                echo '<div class="col-md-12"><div class="alert alert-success">'.$this->session->flashdata('success_document_upload').'</div></div>';
+              }
+              if($this->session->flashdata('error_document_upload')){
+                echo '<div class="col-md-12"><div class="alert alert-danger">'.$this->session->flashdata('error_document_upload').'</div></div>';
+              }
+            ?>
               <table class="table table-hover" id="tbl-word">
               <thead>
                 <tr>

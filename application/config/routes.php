@@ -55,5 +55,21 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['translate/word/ajax/(:num)'] = 'translate/wordAjax/$1';
-$route['translate/excel/ajax'] = 'translate/excelAjax';
+$route['translate/excel/ajax/(:num)'] = 'translate/excelAjax/$1';
+
 $route['translate/word/edit/(:num)'] = 'translate/editWord/$1';
+$route['translate/word/add'] = 'translate/editWord';
+
+$route['translate/excel/edit/(:num)'] = 'translate/editExcel/$1';
+$route['translate/excel/add'] = 'translate/editExcel';
+
+$route['translate/word/download/(:any)'] = 'translate/download/$1';
+$route['translate/processWord'] = 'translate/processWord';
+
+$route['dictionary/list'] = 'dictionary/list_dic';
+$route['dictionary/edit/(:num)'] = 'dictionary/edit/$1';
+$route['dictionary/add'] = 'dictionary/edit';
+
+$route['dictionary/word-list/(:any)'] = 'dictionary/list_words/$1';
+$route['dictionary/words_add/(:any)'] = 'dictionary/add_words/$1';
+$route['dictionary/words_edit/(:num)'] = 'dictionary/words_edit/$1';

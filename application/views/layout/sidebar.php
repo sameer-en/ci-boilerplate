@@ -53,7 +53,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo site_url('dictionary/');?>">Dictionaries</a></li>
+            <li><a href="<?php echo site_url('dictionary/list');?>">Dictionaries</a></li>
             <li><a href="<?php echo site_url('dictionary/languages');?>">Languages</a></li>
             
           </ul>

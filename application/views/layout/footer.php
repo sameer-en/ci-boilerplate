@@ -133,8 +133,15 @@ if (!empty($assets['footer'])) {
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-<script>
-  $(function(){ $('[data-toggle="tooltip"]').tooltip()});
+<script type="text/javascript">
+  $(function(){ 
+    $('[data-toggle="tooltip"]').tooltip();
+
+   setTimeout(function(){
+     $('.alert.alert-danger,.alert.alert-success').slideUp('slow');
+   },2000);
+  });
+
 </script>
 
 </body>
